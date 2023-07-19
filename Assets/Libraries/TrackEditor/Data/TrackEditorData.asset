@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TrackEditorData
   m_EditorClassIdentifier: 
   trackSegmentPrefabs: []
-  localPath: Assets/Libraries/TrackEditor/Data
-  relativeDefaultTrackPath: Tracks/TrackPrefabs
-  customTrackSegmentsPaths: []
   tracks: []
+  localPath: 
+  relativeDefaultTrackPath: 
+  customTrackSegmentsPaths: []

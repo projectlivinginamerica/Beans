@@ -8,19 +8,19 @@ using System.Linq;
 using System;
 
 // should not be making more of these, uncomment to be able to in case of emergency
-// [CreateAssetMenu(menuName = "TrackEditorData")]
+//[CreateAssetMenu(menuName = "TrackEditorData")]
 [ExecuteInEditMode]
 public class TrackEditorData : ScriptableObject
 {
     public List<GameObject> trackSegmentPrefabs = new List<GameObject>();
     
-    [HideInInspector]
+    [HideInInspector, SerializeField]
     public List<Track> tracks = new List<Track>();
     private int currentTrack = -1;
 
     public string localPath;
     public string relativeDefaultTrackPath;
-    [HideInInspector]
+    [HideInInspector, SerializeField]
     public List<string> customTrackSegmentsPaths = new List<string>();
 
     public void PopulateSegments(bool useDefaultAssets)
@@ -34,7 +34,6 @@ public class TrackEditorData : ScriptableObject
             foreach(string guid in defaultAssetGuids)
             {
                 GameObject go = AssetDatabase.LoadAssetAtPath<GameObject>(AssetDatabase.GUIDToAssetPath(guid));
-                Assert.IsTrue(go.GetComponent<TrackSegment>() != null);
                 trackSegmentPrefabs.Add(go);
             }
         }
@@ -46,7 +45,6 @@ public class TrackEditorData : ScriptableObject
             foreach(string guid in customAssetGuids)
             {
                 GameObject go = AssetDatabase.LoadAssetAtPath<GameObject>(AssetDatabase.GUIDToAssetPath(guid));
-                Assert.IsTrue(go.GetComponent<TrackSegment>() != null, "Track segment " + go.name + "is not properly formatted to be used as a segment! Ensure you are using the TrackSegment, TrackConnection, and TrackConnectionLocator components correctly.");
                 trackSegmentPrefabs.Add(go);
             }
         }
@@ -126,6 +124,7 @@ public class TrackEditorData : ScriptableObject
     }
 }
 
+[System.Serializable]
 public class Track
 {
     public string name = "Unnamed Track";

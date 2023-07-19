@@ -12,6 +12,8 @@ public class TrackEditorWindow : EditorWindow
     private bool useDefaultAssets = true;
     private TrackEditorData trackData;
 
+    private int selectedIndex;
+
     private string pathToEditorWindowLibraryRoot;
     private static readonly string relativePathToEditorScene = "/Scenes/TrackEditor.unity";
     [MenuItem("Tools/Track Editor")]
@@ -21,6 +23,7 @@ public class TrackEditorWindow : EditorWindow
         wnd.titleContent = new GUIContent("Track Editor");
         bool success = wnd.Init();
         if(!success) wnd.Close();
+        else wnd.CreateGUI();
     }
 
     private bool Init() 
@@ -54,7 +57,54 @@ public class TrackEditorWindow : EditorWindow
 
     public void CreateGUI()
     {
+        if(trackData == null) return;
         rootVisualElement.Add(new TextField("Output Directory Path"));
+
+        Button createTrackButton = new Button();
+        createTrackButton.clicked += createNewTrack;
+        createTrackButton.text = "Create New Track";
+
+        rootVisualElement.Add(createTrackButton);
+
+        ListView trackList = new ListView();
+        trackList.makeItem = () => new Label();
+        trackList.bindItem = (item, index) => { (item as Label).text = trackData.tracks[index].name; };
+        trackList.reorderable = false;
+        trackList.itemsSource = trackData.tracks;
+        trackList.onSelectionChange += OnListSelectionChange;
+
+        rootVisualElement.Add(trackList);
+
+        Button editTrackButton = new Button();
+        editTrackButton.clicked += editTrack;
+        editTrackButton.text = "Edit Track";
+        editTrackButton.SetEnabled(trackList.selectedItem != null);
+
+        rootVisualElement.Add(editTrackButton);
     }
+
+    private void createNewTrack()
+    {
+        int index = trackData.CreateNewTrack();
+        GameObject parent = new GameObject("NewTrack");
+        trackData.tracks[index].parentObject = parent;
+        editTrack(index);
+    }
+
+    private void OnListSelectionChange(IEnumerable<object> value)
+    {
+        CreateGUI();
+    }
+
+    private void editTrack()
+    {
+    
+    }
+
+    private void editTrack(int index)
+    {
+
+    }
+
 
 }
