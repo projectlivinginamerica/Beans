@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8135817075822963777}
   - component: {fileID: 9125579943140270980}
   m_Layer: 11
-  m_Name: ModularTrackBank
+  m_Name: CurvedBank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -5,10 +5,9 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class TrackSegment : MonoBehaviour
 {
-    public List<TrackConnection> inConnections;
-    public List<TrackConnection> outConnections;
+    public List<TrackConnection> inConnections = new List<TrackConnection>();
+    public List<TrackConnection> outConnections = new List<TrackConnection>();
 
-    // Start is called before the first frame update
     void Start()
     {
         TrackConnection[] childConnections = GetComponentsInChildren<TrackConnection>();
