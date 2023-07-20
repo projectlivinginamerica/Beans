@@ -16,10 +16,12 @@ public class TrackEditorData : ScriptableObject
     
     [HideInInspector, SerializeField]
     public List<Track> tracks = new List<Track>();
-    private int currentTrack = -1;
+    [HideInInspector]
+    public int currentTrack = -1;
 
     public string localPath;
     public string relativeDefaultTrackPath;
+    public string outputDirectoryPath;
     [HideInInspector, SerializeField]
     public List<string> customTrackSegmentsPaths = new List<string>();
 
@@ -61,7 +63,7 @@ public class TrackEditorData : ScriptableObject
 
     public void EditTrack(int index)
     {
-        Assert.IsTrue(currentTrack == -1);
+        Assert.IsTrue(currentTrack == -1 || currentTrack == index);
         currentTrack = index;
         tracks[index].unsavedChanges = true;
     }
@@ -71,19 +73,21 @@ public class TrackEditorData : ScriptableObject
         if(tracks[currentTrack].isNew)
         {
             tracks.RemoveAt(currentTrack);
+            currentTrack = -1;
         }
         else
         {
 
             tracks[currentTrack].unsavedChanges = false;
+            currentTrack = -1;
         }
     }
 
-    public bool SaveCurrentTrack(string outputDirectory)
+    public bool SaveCurrentTrack()
     {
-        if(!Directory.Exists(outputDirectory))
+        if(!Directory.Exists(outputDirectoryPath))
         {
-            Debug.Log("Output directory " + outputDirectory + " does not exist! Please create it or update the Output Directory Path and try again.");
+            Debug.Log("Output directory " + outputDirectoryPath + " does not exist! Please create it or update the Output Directory Path and try again.");
             return false;
         }
          
@@ -91,19 +95,20 @@ public class TrackEditorData : ScriptableObject
         if(tracks[currentTrack].isNew)
         {
             Assert.IsTrue(tracks[currentTrack].prefabPath == null);
-            if(tracks[currentTrack].parentObject != null)
+            if(tracks[currentTrack].parentObject == null)
             {
                 Debug.Log("No track created! Can't save to disk.");
                 return false;
             }
             string fileName = new string(tracks[currentTrack].name.Where(c => !Char.IsWhiteSpace(c)).ToArray()); // remove all whitespace from the name given
-            tracks[currentTrack].prefabPath = outputDirectory + "/" + fileName + ".asset";
+            tracks[currentTrack].prefabPath = outputDirectoryPath + "/" + fileName + ".prefab";
             tracks[currentTrack].prefabPath = AssetDatabase.GenerateUniqueAssetPath(tracks[currentTrack].prefabPath);
             PrefabUtility.SaveAsPrefabAssetAndConnect(tracks[currentTrack].parentObject, tracks[currentTrack].prefabPath, InteractionMode.UserAction, out success);
             if(success)
             {
                 tracks[currentTrack].isNew = false;
                 tracks[currentTrack].unsavedChanges = false;
+                currentTrack = -1;
             }
             else
             {
@@ -117,6 +122,7 @@ public class TrackEditorData : ScriptableObject
             if(success)
             {
                 tracks[currentTrack].unsavedChanges = false;
+                currentTrack = -1;
             }
         }
         

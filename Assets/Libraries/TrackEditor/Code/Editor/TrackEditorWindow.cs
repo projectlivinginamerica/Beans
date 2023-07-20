@@ -8,7 +8,6 @@ using UnityEditor.SceneManagement;
 
 public class TrackEditorWindow : EditorWindow
 {
-    public string outputDirectoryPath;
     private bool useDefaultAssets = true;
     private TrackEditorData trackData;
 
@@ -16,6 +15,23 @@ public class TrackEditorWindow : EditorWindow
 
     private string pathToEditorWindowLibraryRoot;
     private static readonly string relativePathToEditorScene = "/Scenes/TrackEditor.unity";
+
+    bool editMode = false;
+
+#region Editor Elements
+    TextField outputDirectoryPathTextField;
+
+    VisualElement trackListView;
+    Button createTrackButton;
+    Button editTrackButton;
+    ListView trackList;
+
+    VisualElement editTrackView;
+    TextField trackName;
+    Button saveTrackChanges;
+    Button discardTrackChanges;
+#endregion
+
     [MenuItem("Tools/Track Editor")]
     public static void ShowWindow()
     {
@@ -58,29 +74,75 @@ public class TrackEditorWindow : EditorWindow
     public void CreateGUI()
     {
         if(trackData == null) return;
-        rootVisualElement.Add(new TextField("Output Directory Path"));
 
-        Button createTrackButton = new Button();
+        trackListView = new VisualElement();
+
+        outputDirectoryPathTextField = new TextField("Output Directory Path");
+        outputDirectoryPathTextField.SetValueWithoutNotify(trackData.outputDirectoryPath);
+
+        trackListView.Add(outputDirectoryPathTextField);
+
+        createTrackButton = new Button();
         createTrackButton.clicked += createNewTrack;
         createTrackButton.text = "Create New Track";
 
-        rootVisualElement.Add(createTrackButton);
+        trackListView.Add(createTrackButton);
 
-        ListView trackList = new ListView();
+        trackList = new ListView();
         trackList.makeItem = () => new Label();
         trackList.bindItem = (item, index) => { (item as Label).text = trackData.tracks[index].name; };
         trackList.reorderable = false;
         trackList.itemsSource = trackData.tracks;
-        trackList.onSelectionChange += OnListSelectionChange;
 
-        rootVisualElement.Add(trackList);
+        trackListView.Add(trackList);
 
-        Button editTrackButton = new Button();
+        editTrackButton = new Button();
         editTrackButton.clicked += editTrack;
         editTrackButton.text = "Edit Track";
         editTrackButton.SetEnabled(trackList.selectedItem != null);
 
-        rootVisualElement.Add(editTrackButton);
+        trackListView.Add(editTrackButton);
+
+        rootVisualElement.Add(trackListView);
+
+        editTrackView = new VisualElement();
+        
+        trackName = new TextField("Track Name");
+        editTrackView.Add(trackName);
+        
+        saveTrackChanges = new Button();
+        saveTrackChanges.text = "Save Changes to Track";
+        saveTrackChanges.clicked += saveTrack;
+        editTrackView.Add(saveTrackChanges);
+
+        discardTrackChanges = new Button();
+        discardTrackChanges.text = "Discard Changes to Track";
+        discardTrackChanges.clicked += discardChanges;
+        editTrackView.Add(discardTrackChanges);
+
+        editTrackView.SetEnabled(false);
+        editTrackView.visible = false;
+
+        rootVisualElement.Add(editTrackView);
+    }
+
+
+    void Update()
+    {
+        if(trackData != null && trackData.outputDirectoryPath != outputDirectoryPathTextField.text)
+        {
+            trackData.outputDirectoryPath = outputDirectoryPathTextField.text;
+        }
+
+        if(editMode)
+        {   
+            if(trackData.tracks[trackData.currentTrack].name != trackName.text)
+                trackData.tracks[trackData.currentTrack].name = trackName.text;
+        }
+        else
+        {
+            editTrackButton.SetEnabled(trackList.selectedItem != null);
+        }
     }
 
     private void createNewTrack()
@@ -91,19 +153,52 @@ public class TrackEditorWindow : EditorWindow
         editTrack(index);
     }
 
-    private void OnListSelectionChange(IEnumerable<object> value)
-    {
-        CreateGUI();
-    }
-
     private void editTrack()
     {
-    
+        editTrack(trackList.selectedIndex);
     }
 
     private void editTrack(int index)
     {
+        editMode = true;
 
+        trackListView.visible = false;
+        trackListView.SetEnabled(false);
+
+        editTrackView.SetEnabled(true);
+        editTrackView.visible = true;
+
+        trackData.EditTrack(index);
+    }
+
+    private void saveTrack()
+    {
+        bool success = trackData.SaveCurrentTrack();
+        if(success)
+        {
+            showTrackList();
+        }
+        else
+        {
+
+        }
+    }
+
+    private void showTrackList()
+    {
+        editMode = false;
+
+        trackListView.visible = true;
+        trackListView.SetEnabled(true);
+
+        editTrackView.SetEnabled(false);
+        editTrackView.visible = false;
+    }
+
+    private void discardChanges()
+    {
+        trackData.DiscardChangesToCurrentTrack();
+        showTrackList();
     }
 
 
