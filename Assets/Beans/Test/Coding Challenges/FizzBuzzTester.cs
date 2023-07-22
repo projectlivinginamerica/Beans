@@ -30,6 +30,7 @@ public class FizzBuzzTester : MonoBehaviour
         {
             fizzBuzzOutput += "Test Value: " + testValues[i].ToString() + ": \n";
             IList<string> output = fbObj.FizzBuzz(testValues[i]);
+            if(output == null) continue;
             for (int j = 0; j < output.Count; j++)
             {
                 fizzBuzzOutput += "   " + output[j] + "\n";
