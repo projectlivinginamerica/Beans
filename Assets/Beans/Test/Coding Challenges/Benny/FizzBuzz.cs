@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Web.WebPages;
@@ -16,26 +17,29 @@ public class FizzBuzz : MonoBehaviour
             return null;
         }
 
-        List<string> retString = new List<string>();
-        for (int i = 1; i < n; i++)
+        List<string> answer = new List<string>();
+        for (int i = 1; i <= n; i++)
         {
             string newEntry = new string("");
             if (i % 3 == 0)
             {
                 newEntry += "Fizz";
             }
+
             if (i % 5 == 0)
             {
                 newEntry += "Buzz";
             }
-            if (newEntry.IsEmpty())
+
+            if (String.IsNullOrEmpty(newEntry))
             {
                 newEntry += i.ToString();
             }
-            retString.Add(newEntry);
+
+            answer.Add(newEntry);
         }
 
-        return retString;
+        return answer;  
     }
 
     // Start is called before the first frame update
