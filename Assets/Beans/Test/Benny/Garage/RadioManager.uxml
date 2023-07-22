@@ -1,5 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Label text="Hello World! From UXML" />
-    <ui:Button text="Button" display-tooltip-when-elided="true" name="Forward" style="position: absolute; top: 121px; left: 327px;" />
-    <ui:Button text="Button" display-tooltip-when-elided="true" name="Prev" style="position: absolute; top: 124px; left: 251px;" />
-</ui:UXML>
