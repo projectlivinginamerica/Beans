@@ -32,6 +32,7 @@ public class MaterialLayer : MonoBehaviour
     {
         Debug.Log("OnColorWheelButton");
         ColorPicker.gameObject.SetActive(true);
+        ColorPicker.SetColor(MaterialColor);
     }
 
     public void OnTextureButton()
@@ -46,24 +47,20 @@ public class MaterialLayer : MonoBehaviour
 
     public void OnColorWheelClosed(bool bCanceled)
     {
-        Debug.Log("Yo " + bCanceled);
         if (bCanceled)
         {
             ColorPicker.gameObject.SetActive(false);
             return;
         }
 
-        MaterialColor = ColorPicker.GetColor();
-        foreach(Material mat in VehicleMaterials)
-        {
-            mat.SetColor("_BaseColor", MaterialColor);
-        }
+        SetVehicleColor(ColorPicker.GetColor());
     }
 
-    public void OnColorWheelUpdate(BaseEventData e)
+    public void OnColorWheelUpdate(Color newColor)
     {
-       // Debug.Log("here!");
+        SetVehicleColor(newColor);
     }
+
     public void SetVehicle(GameObject inVehicle)
     {
         Vehicle = inVehicle;
@@ -80,6 +77,14 @@ public class MaterialLayer : MonoBehaviour
             var curList = new List<Material>();
             meshRenderer.GetMaterials(curList);
             VehicleMaterials.AddRange(curList);
+        }
+    }
+
+    private void SetVehicleColor(Color newColor)
+    {
+        foreach(Material mat in VehicleMaterials)
+        {
+            mat.SetColor("_BaseColor", newColor);
         }
     }
 }
