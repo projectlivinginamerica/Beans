@@ -64,7 +64,7 @@ public class MaterialLayer : MonoBehaviour
     public void SetVehicle(GameObject inVehicle)
     {
         Vehicle = inVehicle;
-        MeshRenderer[] Meshes = Vehicle.GetComponentsInChildren<MeshRenderer>();
+        SkinnedMeshRenderer[] Meshes = Vehicle.GetComponentsInChildren<SkinnedMeshRenderer>();
         if (Meshes == null)
         {
             return;
@@ -73,7 +73,7 @@ public class MaterialLayer : MonoBehaviour
         VehicleMaterials = new List<Material>();
         for (int i = 0; i < Meshes.Length; i++)
         {
-            MeshRenderer meshRenderer = Meshes[i];
+            SkinnedMeshRenderer meshRenderer = Meshes[i];
             var curList = new List<Material>();
             meshRenderer.GetMaterials(curList);
             VehicleMaterials.AddRange(curList);
@@ -82,6 +82,11 @@ public class MaterialLayer : MonoBehaviour
 
     private void SetVehicleColor(Color newColor)
     {
+        if (VehicleMaterials == null)
+        {
+            return;
+        }
+
         foreach(Material mat in VehicleMaterials)
         {
             mat.SetColor("_BaseColor", newColor);
