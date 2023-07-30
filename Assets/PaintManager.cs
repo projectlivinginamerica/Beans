@@ -5,19 +5,37 @@ using UnityEngine.UI;
 
 public class PaintManager : MonoBehaviour
 {
-    public Button AddLayerButton;
-    public Button DeleteLayerButton;
+    [SerializeField] private Button AddLayerButton;
+    [SerializeField] private Button DeleteLayerButton;
 
-    public MaterialLayer[] MaterialLayers;
-    public GameObject Vehicle;
+    [SerializeField] private MaterialLayer[] MaterialLayers;
+    [SerializeField] private GameObject Vehicle;
 
     private int NumLayers = 0;
     private int MaxLayers = 3;
 
+    private List<Material> VehicleMaterials;
+
     // Start is called before the first frame update
     void Start()
     {
-        PopulatePaintFields();
+        if (Vehicle != null)
+        {
+            SkinnedMeshRenderer[] Meshes = Vehicle.GetComponentsInChildren<SkinnedMeshRenderer>();
+            if (Meshes == null)
+            {
+                return;
+            }
+
+            VehicleMaterials = new List<Material>();
+            for (int i = 0; i < Meshes.Length; i++)
+            {
+                SkinnedMeshRenderer meshRenderer = Meshes[i];
+                var curList = new List<Material>();
+                meshRenderer.GetMaterials(curList);
+                VehicleMaterials.AddRange(curList);
+            }
+        }
     }
 
     // Update is called once per frame
@@ -26,6 +44,7 @@ public class PaintManager : MonoBehaviour
         
     }
 
+   
     void PopulatePaintFields()
     {
         if (NumLayers == 3)
@@ -83,4 +102,16 @@ public class PaintManager : MonoBehaviour
         PopulatePaintFields();
     }
 
+    public void OnWheelColorChanged(Color newColor)
+    {
+        if (VehicleMaterials == null)
+        {
+            return;
+        }
+
+        foreach(Material mat in VehicleMaterials)
+        {
+            mat.SetColor("_WheelColor", newColor);
+        }
+    }
 }
