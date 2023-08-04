@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PaintManager : MonoBehaviour
+public class GarageManager : MonoBehaviour
 {
     [SerializeField] private Button AddLayerButton;
     [SerializeField] private Button DeleteLayerButton;
@@ -113,5 +114,11 @@ public class PaintManager : MonoBehaviour
         {
             mat.SetColor("_WheelColor", newColor);
         }
+    }
+
+    public void OnBackToMainMenuBtn()
+    {
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
+        Object.Destroy(gameObject);
     }
 }

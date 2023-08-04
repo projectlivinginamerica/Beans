@@ -63,7 +63,7 @@ public class ObjectiveHUDManger : MonoBehaviour
                 toast.counterTextContent.text = updateObjective.counterText;
 
             RectTransform toastRectTransform = toast.GetComponent<RectTransform>();
-            if (toastRectTransform != null) UnityEngine.UI.LayoutRebuilder.ForceRebuildLayoutImmediate(toastRectTransform);
+           // if (toastRectTransform != null) UnityEngine.UI.LayoutRebuilder.ForceRebuildLayoutImmediate(toastRectTransform);
             
         }
     }
