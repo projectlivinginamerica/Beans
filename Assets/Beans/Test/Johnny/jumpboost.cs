@@ -16,7 +16,7 @@ public class jumpboost : MonoBehaviour
         ArcadeKart theCart = Collision.gameObject.GetComponent<ArcadeKart>();
         if (theCart == null)
             return;
-        Debug.Log($"{theCart}");
+
         //get rigid body if and apply force
         Rigidbody rb = theCart.GetComponent<Rigidbody>();
         rb.AddForce(theCart.transform.up * LaunchForce);    

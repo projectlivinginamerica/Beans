@@ -49,7 +49,7 @@ public class BeansMainMenu : MonoBehaviour
         MainMenuGameObject.SetActive(true);
     }
 
-    public void OnLoadGarageBtnPressed()
+    public void OnLoadGarage()
     {
         if (CurMenuState != eMenuState.TitleScreen)
         {
@@ -60,7 +60,7 @@ public class BeansMainMenu : MonoBehaviour
         Object.Destroy(gameObject);
     }
 
-    public void OnLoadAngryBean()
+    public void OnLoadAngryBeans()
     {
         if (CurMenuState != eMenuState.TitleScreen)
         {
@@ -68,6 +68,17 @@ public class BeansMainMenu : MonoBehaviour
         }
 
         SceneManager.LoadScene("AngryBeans", LoadSceneMode.Additive);
+        Object.Destroy(gameObject);
+    }
+
+    public void OnLoadFeaturedArtists()
+    {
+        if (CurMenuState != eMenuState.TitleScreen)
+        {
+            return;
+        }
+
+        SceneManager.LoadScene("FeaturedArtists", LoadSceneMode.Additive);
         Object.Destroy(gameObject);
     }
 }
