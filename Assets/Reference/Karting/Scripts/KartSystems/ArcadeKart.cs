@@ -172,6 +172,7 @@ namespace KartGame.KartSystems
 
         // can the kart move?
         bool m_CanMove = true;
+        bool m_CanAccelerate = true;
         List<StatPowerup> m_ActivePowerupList = new List<StatPowerup>();
         ArcadeKart.Stats m_FinalStats;
 
@@ -184,6 +185,7 @@ namespace KartGame.KartSystems
         public void AddPowerup(StatPowerup statPowerup) => m_ActivePowerupList.Add(statPowerup);
         public void SetCanMove(bool move) => m_CanMove = move;
         public float GetMaxSpeed() => Mathf.Max(m_FinalStats.TopSpeed, m_FinalStats.ReverseSpeed);
+        public void SetCanAccelerate(bool accel) => m_CanAccelerate = accel;
 
         private void ActivateDriftVFX(bool active)
         {
@@ -415,6 +417,12 @@ namespace KartGame.KartSystems
 
         void MoveVehicle(bool accelerate, bool brake, float turnInput)
         {
+            if (m_CanAccelerate == false)
+            {
+                accelerate = false;
+                brake = false;
+            }
+
             float accelInput = (accelerate ? 1.0f : 0.0f) - (brake ? 1.0f : 0.0f);
 
             // manual acceleration curve coefficient scalar
@@ -440,7 +448,7 @@ namespace KartGame.KartSystems
             float finalAccelPower = isBraking ? m_FinalStats.Braking : accelPower;
 
             float finalAcceleration = finalAccelPower * accelRamp;
-
+            
             // apply inputs to forward/backward
             float turningPower = IsDrifting ? m_DriftTurningPower : turnInput * m_FinalStats.Steer;
 
