@@ -19,11 +19,6 @@ public class BeansMainMenu : MonoBehaviour
     void Start()
     {
         CurMenuState = eMenuState.TitleScreen;
-
-        if (SceneManager.GetSceneByBuildIndex(1).isLoaded == false)
-        {
-            SceneManager.LoadScene(1, LoadSceneMode.Additive);
-        }
     }
 
     // Update is called once per frame
@@ -62,7 +57,7 @@ public class BeansMainMenu : MonoBehaviour
         }
 
         SceneManager.LoadScene("GarageScene", LoadSceneMode.Additive);
-        Object.Destroy(gameObject);
+        SceneManager.UnloadSceneAsync("MainMenu");
     }
 
     public void OnLoadAngryBeans()
@@ -73,7 +68,7 @@ public class BeansMainMenu : MonoBehaviour
         }
 
         SceneManager.LoadScene("AngryBeans", LoadSceneMode.Additive);
-        Object.Destroy(gameObject);
+        SceneManager.UnloadSceneAsync("MainMenu");
     }
 
     public void OnLoadFeaturedArtists()
@@ -84,6 +79,6 @@ public class BeansMainMenu : MonoBehaviour
         }
 
         SceneManager.LoadScene("FeaturedArtists", LoadSceneMode.Additive);
-        Object.Destroy(gameObject);
+        SceneManager.UnloadSceneAsync("MainMenu");
     }
 }

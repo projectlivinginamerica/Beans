@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -36,6 +35,11 @@ public class GarageManager : MonoBehaviour
                 meshRenderer.GetMaterials(curList);
                 VehicleMaterials.AddRange(curList);
             }
+        }
+
+        if (GameObject.FindObjectOfType<AudioListener>() == null)
+        {
+            gameObject.AddComponent(typeof(AudioListener));
         }
     }
 
@@ -119,6 +123,6 @@ public class GarageManager : MonoBehaviour
     public void OnBackToMainMenuBtn()
     {
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
-        Object.Destroy(gameObject);
+        SceneManager.UnloadSceneAsync("GarageScene");
     }
 }

@@ -38,6 +38,11 @@ public class AngryBeansManager : MonoBehaviour
     void Start()
     {
         Kart.SetCanAccelerate(false);
+
+        if (GameObject.FindObjectOfType<AudioListener>() == null)
+        {
+            gameObject.AddComponent(typeof(AudioListener));
+        }
     }
 
     // Update is called once per frame
@@ -107,7 +112,7 @@ public class AngryBeansManager : MonoBehaviour
             if (Kart.Rigidbody.velocity.magnitude < 1.0f)
             {
                 AngryBeansState = eAngryBeansState.Score;
-                Score.active = true;
+                Score.SetActive(true);
             }
         }
     }
@@ -115,7 +120,7 @@ public class AngryBeansManager : MonoBehaviour
     public void OnQuitGame()
     {
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
-        Object.Destroy(gameObject);    
+        SceneManager.UnloadSceneAsync("AngryBeans");
     }
 
     public void OnStartGame()
@@ -140,7 +145,8 @@ public class AngryBeansManager : MonoBehaviour
 
     public void OnRestart()
     {
+        SceneManager.UnloadSceneAsync("AngryBeans");
         SceneManager.LoadScene("AngryBeans", LoadSceneMode.Additive);
-        Object.Destroy(gameObject);    
+//        Object.Destroy(gameObject);    
     }
 }
