@@ -19,6 +19,11 @@ public class BeansMainMenu : MonoBehaviour
     void Start()
     {
         CurMenuState = eMenuState.TitleScreen;
+
+        if (SceneManager.GetSceneByBuildIndex(1).isLoaded == false)
+        {
+            SceneManager.LoadScene(1, LoadSceneMode.Additive);
+        }
     }
 
     // Update is called once per frame

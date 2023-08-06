@@ -5358,7 +5358,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1264722519}
         m_TargetAssemblyTypeName: AngryBeansManager, Assembly-CSharp
-        m_MethodName: OnBackToTitleBtnPressed
+        m_MethodName: OnQuitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11163,7 +11163,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1161215784
 MonoBehaviour:
   m_ObjectHideFlags: 0
