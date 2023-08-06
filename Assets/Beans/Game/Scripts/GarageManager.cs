@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -40,6 +42,12 @@ public class GarageManager : MonoBehaviour
         if (GameObject.FindObjectOfType<AudioListener>() == null)
         {
             gameObject.AddComponent(typeof(AudioListener));
+        }
+
+        if (GameObject.FindObjectOfType<EventSystem>() == null)
+        {
+            gameObject.AddComponent(typeof(EventSystem));
+            gameObject.AddComponent(typeof(StandaloneInputModule)); 
         }
     }
 

@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class FeaturedArtists : MonoBehaviour
 {
@@ -10,7 +11,16 @@ public class FeaturedArtists : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (GameObject.FindObjectOfType<AudioListener>() == null)
+        {
+            gameObject.AddComponent(typeof(AudioListener));
+        }
+
+        if (GameObject.FindObjectOfType<EventSystem>() == null)
+        {
+            gameObject.AddComponent(typeof(EventSystem));
+            gameObject.AddComponent(typeof(StandaloneInputModule)); 
+        }
     }
 
     // Update is called once per frame

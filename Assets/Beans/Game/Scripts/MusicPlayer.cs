@@ -16,63 +16,11 @@ public class MusicPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayRandomSong();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    private void PlayRandomSong()
-    {
-        MusicPlayerSource.Stop();
         if (SongList.Length == 0)
         {
             return;
         }
         MusicPlayerSource.clip = SongList[Random.Range(0, SongList.Length - 1)];
         MusicPlayerSource.Play();
-    }
-
-    public void PlayNextSong()
-    {
-        MusicPlayerSource.Stop();
-        if (SongList.Length == 0)
-        {
-            return;
-        }
-
-        CurrentSongIndex = CurrentSongIndex + 1;
-        if (CurrentSongIndex >= SongList.Length)
-        {
-            CurrentSongIndex = 0;
-        }
-
-        MusicPlayerSource.clip = SongList[CurrentSongIndex];
-        MusicPlayerSource.Play();
-    }
-
-    public void PlayPrevSong()
-    {
-        MusicPlayerSource.Stop();
-        if (SongList.Length == 0)
-        {
-            return;
-        }
-
-        CurrentSongIndex = CurrentSongIndex - 1;
-        if (CurrentSongIndex <= 0)
-        {
-            CurrentSongIndex = SongList.Length - 1;
-        }
-        MusicPlayerSource.clip = SongList[CurrentSongIndex];
-        MusicPlayerSource.Play();
-    }
-
-    public void TestButton()    
-    {
-            MusicPlayerImage.transform.position += Random.insideUnitSphere * 2;
     }
 }
