@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: cd1f14c89be2bc44a916e8e61e39cc8e
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - GeoFont
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 434964f860e274343b0de9d934fba03f, type: 3}
+  - {fileID: 12800000, guid: 066ca3d3f68dd824bbca2526f9df1706, type: 3}
+  - {fileID: 12800000, guid: 47ea1e02585474b49a40b4a08d51ba88, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
