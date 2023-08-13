@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using KartGame.KartSystems;
-using UnityEngineInternal;
-using System.Windows.Forms.DataVisualization.Charting;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class AngryBeansManager : MonoBehaviour
 {
@@ -42,6 +39,12 @@ public class AngryBeansManager : MonoBehaviour
         if (GameObject.FindObjectOfType<AudioListener>() == null)
         {
             gameObject.AddComponent(typeof(AudioListener));
+        }
+
+        if (GameObject.FindObjectOfType<EventSystem>() == null)
+        {
+            gameObject.AddComponent(typeof(EventSystem));
+            gameObject.AddComponent(typeof(StandaloneInputModule)); 
         }
     }
 
