@@ -522,7 +522,7 @@ GameObject:
   - component: {fileID: 611354386}
   - component: {fileID: 611354385}
   m_Layer: 0
-  m_Name: RadioManager
+  m_Name: TheRadio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
