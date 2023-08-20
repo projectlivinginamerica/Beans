@@ -6,13 +6,7 @@ using static UnityEditor.PlayerSettings;
 
 public class ProceduralTrackGenerator : MonoBehaviour
 {
-    [Serializable]
-    class TrackPrefabInfo
-    {
-        public GameObject Prefab;
-    }
-
-    [SerializeField] TrackPrefabInfo[] PrefabList;
+    [SerializeField] ProcGenTrackSegment[] TrackSegmentList;
     [SerializeField] bool GenerateTrackNow;
 
     // Start is called before the first frame update
@@ -40,7 +34,7 @@ public class ProceduralTrackGenerator : MonoBehaviour
         Debug.Log("GenerateTrack Now!");
         GenerateTrackNow = false;
 
-        GameObject.Instantiate(PrefabList[0].Prefab, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 1));
-        GameObject.Instantiate(PrefabList[0].Prefab, new Vector3(0, 0, 100), new Quaternion(0, 0, 0, 1));
+        GameObject.Instantiate(TrackSegmentList[0].gameObject, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 1));
+        GameObject.Instantiate(TrackSegmentList[0].gameObject, new Vector3(0, 0, 100), new Quaternion(0, 0, 0, 1));
     }
 }
