@@ -27,6 +27,8 @@ public class RadioManager : MonoBehaviour {
         
     }
 
+    public AudioClip[] SongList;
+
     public void ButtonNext() {
         if (_number < _endNumber) {
             _number++;
