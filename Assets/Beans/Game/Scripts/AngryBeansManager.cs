@@ -16,6 +16,7 @@ public class AngryBeansManager : MonoBehaviour
 
     [SerializeField] private GameObject StartButton;
     [SerializeField] private GameObject RestartButton;
+    [SerializeField] private GameObject QuitButton;
 
     private float T = 1.0f;
     private bool GasDisabled = false;
@@ -132,6 +133,7 @@ public class AngryBeansManager : MonoBehaviour
         T = 0;
 
         StartButton.SetActive(false);
+        QuitButton.SetActive(false);
         RestartButton.SetActive(true);
     }
     
