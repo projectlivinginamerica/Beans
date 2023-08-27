@@ -63,12 +63,12 @@ public class GarageManager : MonoBehaviour
         if (NumLayers == 3)
         {
             AddLayerButton.interactable = false;
-            AddLayerButton.transform.position = MaterialLayers[MaxLayers].ShowButton.transform.position;
+      //      AddLayerButton.transform.position = MaterialLayers[MaxLayers].ShowButton.transform.position;
         }
         else
         {
             AddLayerButton.interactable = true;
-            AddLayerButton.transform.position = MaterialLayers[NumLayers].ShowButton.transform.position;
+            //AddLayerButton.transform.position = MaterialLayers[NumLayers].ShowButton.transform.position + new Vector3(0, 0, 0);
         }
 
         if (NumLayers == 0)
@@ -80,7 +80,7 @@ public class GarageManager : MonoBehaviour
             DeleteLayerButton.interactable = true;
         }
 
-        DeleteLayerButton.transform.position = AddLayerButton.transform.position + new Vector3(40, 0, 0);
+       // DeleteLayerButton.transform.position = AddLayerButton.transform.position + new Vector3(40, 0, 0);
 
         int i = 0;
         for (i = 0; i < NumLayers; i++)
