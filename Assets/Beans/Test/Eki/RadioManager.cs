@@ -29,6 +29,8 @@ public class RadioManager : MonoBehaviour {
 
     public AudioClip[] SongList;
 
+    public AudioSource MusicSource;
+
     public void ButtonNext() {
         if (_number < _endNumber) {
             _number++;
@@ -43,7 +45,7 @@ public class RadioManager : MonoBehaviour {
         }
     }
 
-    public void ButtonPrevNext(bool Next) { 
+    public void ButtonPrevNext(bool Next) {
         
         if (Next) {
            
@@ -71,6 +73,10 @@ public class RadioManager : MonoBehaviour {
                 _prev.interactable = false;
             }
         }
+        MusicSource.Stop();
+        MusicSource.clip = SongList[_number];
+        MusicSource.Play();
         _textNumber.text = _number.ToString();
+        
     }
 }
