@@ -18,8 +18,14 @@ public class RadioManager : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-          _number = _startNumber;
+          _number = Random.Range(_startNumber, _endNumber);
           _textNumber.text = _number.ToString();
+
+        if (SongList.Length > 0)
+        {
+            MusicSource.clip = SongList[_number];
+            MusicSource.Play();
+        }
     }
 
     // Update is called once per frame
@@ -31,47 +37,27 @@ public class RadioManager : MonoBehaviour {
 
     public AudioSource MusicSource;
 
-    public void ButtonNext() {
-        if (_number < _endNumber) {
-            _number++;
-            _textNumber.text = _number.ToString();
-        }
-    }
-
-    public void ButtonPrev() {
-        if (_number > _startNumber) {
-            _number--;
-            _textNumber.text = _number.ToString();
-        }
-    }
-
     public void ButtonPrevNext(bool Next) {
         
         if (Next) {
            
             _number++;
 
-            _prev.interactable = true;
+            if (_number > _endNumber) {
+                _number = _startNumber;
+            }
 
-            if (_number < _endNumber) {
-                _next.interactable = true;
-            }
-            else {
-                _next.interactable = false;
-            }
+            _prev.interactable = true;
         }
         else {
             
             _number--;
 
-            _next.interactable = true;
+            if (_number < _startNumber) {
+                _number = _endNumber;
+            }
 
-            if (_number > _startNumber) {
-                _prev.interactable = true;
-            }
-            else {
-                _prev.interactable = false;
-            }
+            _next.interactable = true;
         }
         MusicSource.Stop();
         MusicSource.clip = SongList[_number];

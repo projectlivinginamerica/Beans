@@ -543,9 +543,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prev: {fileID: 87854897}
   _next: {fileID: 1198719233}
-  _startNumber: -5
+  _startNumber: 0
   _number: 0
-  _endNumber: 5
+  _endNumber: 6
   _textNumber: {fileID: 1016352976}
   SongList:
   - {fileID: 8300000, guid: 071ea9c1612a89449bea1b5dffabaac5, type: 3}
