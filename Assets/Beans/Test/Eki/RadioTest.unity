@@ -550,11 +550,11 @@ MonoBehaviour:
   SongList:
   - {fileID: 8300000, guid: 071ea9c1612a89449bea1b5dffabaac5, type: 3}
   - {fileID: 8300000, guid: 7eb46ef3908a751409fe35aab6921659, type: 3}
+  - {fileID: 8300000, guid: 1939f7149c0fae14a891ac314cb2e8f3, type: 3}
   - {fileID: 8300000, guid: 625ac8db13f3ab243aed7ba01110a59c, type: 3}
+  - {fileID: 8300000, guid: 93fbb109633e844259ea828442bda0cb, type: 3}
+  - {fileID: 8300000, guid: 179db782f1044bc48b9dff5d487c4bef, type: 3}
   - {fileID: 8300000, guid: 9b03a59f76cf4c34cb624c6d0cf7a3dd, type: 3}
-  - {fileID: 8300000, guid: e8f243f02c8611f448601d8e98a1cc40, type: 3}
-  - {fileID: 8300000, guid: 060fa59b3d0b88749a08f4a29749dfc1, type: 3}
-  - {fileID: 8300000, guid: e10d70c668ac7264880dfc3d06474e53, type: 3}
   MusicSource: {fileID: 611354387}
 --- !u!4 &611354386
 Transform:
@@ -585,7 +585,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
