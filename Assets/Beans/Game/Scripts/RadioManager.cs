@@ -24,27 +24,14 @@ public class RadioManager : MonoBehaviour {
     void Start() {
           _number = _startNumber;
           _textNumber.text = _number.ToString();
+
+        MusicSource.clip = SongList[0];
+        MusicSource.Play();
     }
 
     // Update is called once per frame
     void Update() {
         
-    }
-
-    
-
-    public void ButtonNext() {
-        if (_number < _endNumber) {
-            _number++;
-            _textNumber.text = _number.ToString();
-        }
-    }
-
-    public void ButtonPrev() {
-        if (_number > _startNumber) {
-            _number--;
-            _textNumber.text = _number.ToString();
-        }
     }
 
     public void ButtonPrevNext(bool Next) {
