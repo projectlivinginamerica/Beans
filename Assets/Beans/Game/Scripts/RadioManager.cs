@@ -17,16 +17,16 @@ public class RadioManager : MonoBehaviour {
     public int _number;
     public int _endNumber = 5;
     
-    public TextMeshProUGUI _textNumber;
+    public TextMeshProUGUI _textDisplay;
 
 
     // Start is called before the first frame update
     void Start() {
-          _number = _startNumber;
-          _textNumber.text = _number.ToString();
+        _number = _startNumber;
 
         MusicSource.clip = SongList[0];
         MusicSource.Play();
+        _textDisplay.text = SongList[0].name;
     }
 
     // Update is called once per frame
@@ -65,7 +65,7 @@ public class RadioManager : MonoBehaviour {
         MusicSource.Stop();
         MusicSource.clip = SongList[_number];
         MusicSource.Play();
-        _textNumber.text = _number.ToString();
+        _textDisplay.text = SongList[_number].name;
         
     }
 }
