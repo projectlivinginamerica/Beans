@@ -72,7 +72,7 @@ public class FlexibleColorPicker : MonoBehaviour {
 
     [Tooltip("The (starting) 2D picking mode, i.e. the 2 color values that can be picked with the large square picker.")]
     [SerializeField]
-    private MainPickingMode mode;
+    private MainPickingMode mode = MainPickingMode.HV;
 
     [Tooltip("Sprites to be used in static mode on the main picker, one for each 2D mode.")]
     [SerializeField]
@@ -85,7 +85,7 @@ public class FlexibleColorPicker : MonoBehaviour {
     private BufferedColor bufferedColor;
     private Picker focusedPicker;
     private PickerType focusedPickerType;
-    private MainPickingMode lastUpdatedMode;
+    private MainPickingMode lastUpdatedMode = MainPickingMode.HV;
     private bool typeUpdate;
     private bool triggeredStaticMode;
     private bool materialsSeperated;
@@ -250,6 +250,10 @@ public class FlexibleColorPicker : MonoBehaviour {
         UpdateMarkers();
         UpdateHex();
         onColorChange.Invoke(startingColor);
+
+        // Beans Begin
+        ChangeMode(1);
+        // Beans End
     }
 
     private void Update() {
