@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SongList:
-  - {fileID: 8300000, guid: 060fa59b3d0b88749a08f4a29749dfc1, type: 3}
+  - {fileID: 8300000, guid: 830430d0e211f684e96f2fc7d7ee4ad1, type: 3}
   - {fileID: 8300000, guid: f0548c4efd48dbd449b5ab675f45e6de, type: 3}
   - {fileID: 8300000, guid: e10d70c668ac7264880dfc3d06474e53, type: 3}
   - {fileID: 8300000, guid: 071ea9c1612a89449bea1b5dffabaac5, type: 3}

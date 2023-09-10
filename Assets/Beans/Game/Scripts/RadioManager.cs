@@ -22,11 +22,10 @@ public class RadioManager : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        _number = _startNumber;
-
-        MusicSource.clip = SongList[0];
+        _number = Random.Range(0, SongList.Length - 1);
+        MusicSource.clip = SongList[_number];
         MusicSource.Play();
-        _textDisplay.text = SongList[0].name;
+        _textDisplay.text = SongList[_number].name;
     }
 
     // Update is called once per frame
@@ -66,6 +65,5 @@ public class RadioManager : MonoBehaviour {
         MusicSource.clip = SongList[_number];
         MusicSource.Play();
         _textDisplay.text = SongList[_number].name;
-        
     }
 }
