@@ -13,7 +13,7 @@ public class FCP_ExampleScript : MonoBehaviour {
         fcp.onColorChange.AddListener(OnChangeColor);
     }
 
-    private void OnChangeColor(Color co) {
+    private void OnChangeColor(Color co, int mode) {
         material.color = co;
     }
 }

@@ -36,6 +36,30 @@ public class FlexibleColorPicker : MonoBehaviour {
     * ----------------------------------------------------------
     */
 
+    // Beans Begin Edit
+    public Image[] ButtonImageList = new Image[4];
+
+    public enum ePaintMode
+    {
+        CarBody,
+        Wheels
+    };
+    ePaintMode CurPaintMode = ePaintMode.CarBody;
+
+    public void SetPaintMode(int newPaintMode)
+    {
+        CurPaintMode = (ePaintMode)newPaintMode;
+
+        for (int i = 0; i < ButtonImageList.Length; i++)
+        {
+            ButtonImageList[i].color = Color.white;
+        }
+
+        ButtonImageList[newPaintMode].color = new Color(0.0f, 0.3989f, 1.0f);
+    }
+
+    // Bens End Edit
+
     //Unity connections
     [Tooltip("Connections to the FCP's picker images, this should not be adjusted unless in advanced use cases.")]
     [SerializeField]
@@ -102,7 +126,7 @@ public class FlexibleColorPicker : MonoBehaviour {
     public ColorUpdateEvent onColorChange;
 
     [Serializable]
-    public class ColorUpdateEvent : UnityEvent<Color> { }
+    public class ColorUpdateEvent : UnityEvent<Color, int> { }
 
     //constants
     private const float HUE_LOOP = 5.9999f;
@@ -181,7 +205,7 @@ public class FlexibleColorPicker : MonoBehaviour {
             UpdateTextures();
             UpdateHex();
             typeUpdate = true;
-            onColorChange.Invoke(value);
+            onColorChange.Invoke(value, (int)CurPaintMode);
         }
     }
 
@@ -249,7 +273,7 @@ public class FlexibleColorPicker : MonoBehaviour {
         MakeModeOptions();
         UpdateMarkers();
         UpdateHex();
-        onColorChange.Invoke(startingColor);
+        onColorChange.Invoke(startingColor, (int)CurPaintMode);
 
         // Beans Begin
         ChangeMode(1);
@@ -297,7 +321,7 @@ public class FlexibleColorPicker : MonoBehaviour {
 
         typeUpdate = true;
         UpdateHex();
-        onColorChange.Invoke(bufferedColor.color);
+        onColorChange.Invoke(bufferedColor.color, (int)CurPaintMode);
     }
 
     /// <summary>
@@ -385,7 +409,7 @@ public class FlexibleColorPicker : MonoBehaviour {
 
         typeUpdate = true;
         UpdateHex();
-        onColorChange.Invoke(bufferedColor.color);
+        onColorChange.Invoke(bufferedColor.color, (int)CurPaintMode);
     }
     
     /// <summary>
@@ -401,7 +425,7 @@ public class FlexibleColorPicker : MonoBehaviour {
 
         typeUpdate = true;
         UpdateHex();
-        onColorChange.Invoke(bufferedColor.color);
+        onColorChange.Invoke(bufferedColor.color, (int)CurPaintMode);
     }
 
     /// <summary>
@@ -785,7 +809,7 @@ public class FlexibleColorPicker : MonoBehaviour {
                 bufferedColor.Set(newColor);
                 UpdateMarkers();
                 UpdateTextures();
-                onColorChange.Invoke(newColor);
+                onColorChange.Invoke(newColor,(int)CurPaintMode);
             }
             else
                 startingColor = newColor;

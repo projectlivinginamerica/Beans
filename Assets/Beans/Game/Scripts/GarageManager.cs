@@ -17,6 +17,7 @@ public class GarageManager : MonoBehaviour
     private int MaxLayers = 3;
 
     private List<Material> VehicleMaterials;
+    private MaterialLayer ActiveLayer;
 
     // Start is called before the first frame update
     void Start()
@@ -103,6 +104,11 @@ public class GarageManager : MonoBehaviour
         }
         NumLayers++;
         PopulatePaintFields();
+
+        if (ActiveLayer == null)
+        {
+            ActiveLayer = MaterialLayers[0];
+        }
     }
 
     public void OnRemoveLayer()
@@ -114,8 +120,35 @@ public class GarageManager : MonoBehaviour
         NumLayers--;
         PopulatePaintFields();
     }
+/*
+    */
 
-    public void OnWheelColorChanged(Color newColor)
+    public void OnPickerColorChanged(Color newColor, int mode)
+    {
+        if (mode == 0)
+        {
+            SetVehicleColor(newColor);
+        }
+        else if (mode == 1)
+        {
+            SetWheelColor(newColor);
+        }
+    }
+
+    private void SetVehicleColor(Color newColor)
+    {
+        if (VehicleMaterials == null)
+        {
+            return;
+        }
+
+        foreach(Material mat in VehicleMaterials)
+        {
+            mat.SetColor("_BaseColor", newColor);
+        }
+    }
+
+    public void SetWheelColor(Color newColor)
     {
         if (VehicleMaterials == null)
         {
